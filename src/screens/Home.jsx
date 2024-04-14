@@ -35,12 +35,7 @@ const Home = () => {
       <Button />
       <div>
         <h1 className="text-center my-4 text-xl font-extrabold text-white">
-          {timeline === "weekly"
-            ? "Haftalık"
-            : timeline === "monthly"
-            ? "Aylık"
-            : "Yıllık"}{" "}
-          Liderler
+          {timeline === "daily" ? "Günlük" : "Aylık"} Liderler
         </h1>
         <LeaderCard />
       </div>

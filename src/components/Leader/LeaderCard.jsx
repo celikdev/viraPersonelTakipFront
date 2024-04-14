@@ -17,7 +17,7 @@ const LeaderCard = () => {
 
   const getRank = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/api/user/weekly`)
+      .get(`${process.env.REACT_APP_API_URL}/api/user/daily`)
       .then((res) => {
         console.log(res.data);
         setData(res.data.leaderBoard);

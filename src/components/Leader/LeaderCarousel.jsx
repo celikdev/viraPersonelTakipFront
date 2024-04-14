@@ -47,7 +47,10 @@ const LeaderCarousel = () => {
           interval={3000}
         >
           {user?.map((item, index) => (
-            <div className="h-24 bg-gray-300 flex items-center p-4 mx-4 gap-4 rounded-xl">
+            <div
+              key={index}
+              className="h-24 bg-gray-300 flex items-center p-4 mx-4 gap-4 rounded-xl"
+            >
               <h1 className="font-black text-5xl text-gray-300 p-1 bg-gradient-to-tr from-violet-500 to-fuchsia-500">
                 {index + 1}
               </h1>

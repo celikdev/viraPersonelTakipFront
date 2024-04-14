@@ -10,7 +10,7 @@ import { Admin, Home } from "./screens";
 import { AddUser, Dashboard } from "./screens/Admin/";
 
 const App = () => {
-  const [timeline, setTimeline] = useState("weekly");
+  const [timeline, setTimeline] = useState("daily");
   return (
     <timelineContext.Provider value={{ timeline, setTimeline }}>
       <Router>

@@ -19,8 +19,7 @@ const LeaderCard = () => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}/api/user/daily`)
       .then((res) => {
-        console.log(res.data);
-        setData(res.data.leaderBoard);
+        setData(res.data.leader.leaderBoard);
         setTotal(res.data.total);
       })
       .catch((err) => {
@@ -32,7 +31,6 @@ const LeaderCard = () => {
     getRank();
   }, []);
 
-  console.log(data);
   return (
     <>
       {data && (

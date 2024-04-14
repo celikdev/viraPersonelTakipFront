@@ -17,7 +17,7 @@ const LeaderCarousel = () => {
     await axios
       .get(`${process.env.REACT_APP_API_URL}/api/user/${timeline}`)
       .then((res) => {
-        setUser(res.data.leaderBoard);
+        setUser(res.data.leader.leaderBoard);
       })
       .catch((err) => {
         console.log(err);
@@ -55,7 +55,7 @@ const LeaderCarousel = () => {
                 {index + 1}
               </h1>
               <img
-                src={HakanImage}
+                src={item.imageURL}
                 alt="Hakan Çelik"
                 className="rounded-full !w-20 h-20 object-cover"
               />

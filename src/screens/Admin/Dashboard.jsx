@@ -8,6 +8,7 @@ import { HomeIcon } from "../../assets/icons/Icons";
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [newUserPoint, setNewUserPoint] = useState();
@@ -22,12 +23,29 @@ const Dashboard = () => {
   };
 
   const handleUpdateUser = async () => {
+    setUpdateLoading(true);
     await axios
       .post(
         `${process.env.REACT_APP_API_URL}/api/user/update/${selectedUser._id}`,
         {
           userPoints: Number(newUserPoint),
         }
+      )
+      .then((res) => {
+        setOpen(false);
+        setNewUserPoint("");
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setUpdateLoading(false);
+        getUsers();
+      });
+  };
+
+  const handleDeleteUser = async () => {
+    await axios
+      .delete(
+        `${process.env.REACT_APP_API_URL}/api/user/delete/${selectedUser._id}`
       )
       .then((res) => setOpen(false))
       .catch((err) => console.log(err))
@@ -62,12 +80,20 @@ const Dashboard = () => {
                 className="w-11/12 border-2 border-purple-400 p-2 rounded-lg font-medium text-sm outline-none transition-colors duration-300 focus:border-purple-400"
                 placeholder="Puan"
               />
-              <button
-                onClick={() => handleUpdateUser()}
-                className="font-semibold transition-all duration-300 text-sm border-2 px-6 py-2 focus:bg-purple-400 focus:text-white border-purple-400 rounded-lg"
-              >
-                Kaydet
-              </button>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => handleDeleteUser()}
+                  className="font-semibold transition-all hover:bg-red-400 hover:text-white duration-300 text-sm border-2 px-6 py-2 focus:bg-red-400 focus:text-white border-red-400 rounded-lg"
+                >
+                  Kullanıcıyı Sil
+                </button>
+                <button
+                  onClick={() => handleUpdateUser()}
+                  className="font-semibold transition-all duration-300 text-sm border-2 px-6 py-2 focus:bg-purple-400 focus:text-white border-purple-400 rounded-lg"
+                >
+                  {updateLoading ? <HashLoader size={18} /> : "Kaydet"}
+                </button>
+              </div>
             </div>
           </div>
         ) : (

@@ -49,7 +49,7 @@ const Home = () => {
         {loading ? (
           <HashLoader size={20} color="#6366F1" />
         ) : (
-          <span className="flex text-sm font-bold">
+          <span className="flex text-lg font-bold">
             Toplam: &nbsp; <h1 className="font-extrabold">{total}</h1>
           </span>
         )}

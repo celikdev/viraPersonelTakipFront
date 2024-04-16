@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import Gold from "../../assets/images/gold.png";
-import Silver from "../../assets/images/silver.png";
-import Bronze from "../../assets/images/bronze.png";
 import {
   BronzeCrownIcon,
   CrownIcon,

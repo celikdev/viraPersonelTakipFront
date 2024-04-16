@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HashLoader } from "react-spinners";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [newUserPoint, setNewUserPoint] = useState();
+  const [updateImageLoading, setUpdateImageLoading] = useState(false);
 
   const getUsers = async () => {
     setLoading(true);
@@ -56,17 +57,68 @@ const Dashboard = () => {
     getUsers();
   }, []);
 
+  const [isVisible, setIsVisible] = useState(false);
+
   return (
     <div className="my-4 flex flex-col gap-8">
       <Modal open={open} setOpen={setOpen}>
         {selectedUser ? (
           <div className="flex flex-col h-full justify-around">
             <div className="flex flex-col items-center gap-4">
-              <img
-                src={selectedUser.imageURL}
-                alt="userImage"
-                className="w-32 h-32 rounded-full"
-              />
+              {/* Click and select image */}
+              {updateImageLoading ? (
+                <HashLoader size={24} color="#6366F1" />
+              ) : (
+                <button
+                  onClick={() => {
+                    const input = document.createElement("input");
+                    input.type = "file";
+                    input.accept = "image/*";
+                    input.click();
+                    input.onchange = async (e) => {
+                      const file = e.target.files[0];
+                      const formData = new FormData();
+                      formData.append("image", file);
+                      setUpdateImageLoading(true);
+                      const res = await axios
+                        .post(
+                          `${process.env.REACT_APP_API_URL}/api/user/update-user-image/${selectedUser._id}`,
+                          formData
+                        )
+                        .then((res) => {
+                          setUpdateImageLoading(false);
+                        })
+                        .catch((err) => console.log(err))
+                        .finally(() => {
+                          setUpdateImageLoading(false);
+                          getUsers();
+                          setOpen(false);
+                        });
+
+                      // const imageURL = res.data.imageURL;
+                      // setSelectedUser({ ...selectedUser, imageURL });
+                    };
+                  }}
+                  onMouseOver={() => setIsVisible(true)}
+                  onMouseLeave={() => setIsVisible(false)}
+                  className="flex flex-col items-center relative justify-center"
+                >
+                  <img
+                    src={selectedUser.imageURL}
+                    alt="userImage"
+                    className={`w-32 h-32 rounded-full transition-all duration-300 ${
+                      isVisible && "opacity-50 filter blur-sm grayscale"
+                    }`}
+                  />
+                  <h1
+                    className={`absolute opacity-0 transition-all duration-300  ${
+                      isVisible && "opacity-100 visible"
+                    }`}
+                  >
+                    Değiştirmek İçin Tıkla
+                  </h1>
+                </button>
+              )}
               <span className="font-semibold">{selectedUser.name}</span>
               <span className="font-semibold">
                 Puan: {selectedUser.userPoints}

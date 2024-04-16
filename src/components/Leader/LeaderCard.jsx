@@ -34,7 +34,7 @@ const LeaderCard = () => {
   return (
     <>
       {data && (
-        <div className="flex flex-col  mx-4 items-end gap-2">
+        <div className="flex flex-col mx-4 items-end gap-2">
           {/* 1 */}
           <div className="w-full h-[100%] flex flex-col items-center">
             <CrownIcon className="w-1/4" />
@@ -74,7 +74,7 @@ const LeaderCard = () => {
 
             {/* 3 */}
             <div className="w-1/2 h-[90%] flex flex-col items-center">
-              <BronzeCrownIcon className="w-1/4" />
+              <BronzeCrownIcon className="w-1/2 md:1/5" />
               <div className="w-full justify-end flex bg-bronze flex-col items-center rounded-t-md">
                 <img
                   src={data[2]?.imageURL}

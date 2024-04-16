@@ -18,20 +18,19 @@ const App = () => {
           <Route path="/" exact>
             <Home />
           </Route>
-          {/* TODO: BURADA EGER isAuth=true İSE /admin /dashboard'a atacak */}
           <Route path="/admin" exact>
             <Admin />
           </Route>
-          {sessionStorage.getItem("authStatus") === "true" && (
-            <>
-              <Route path="/admin/dashboard" exact>
-                <Dashboard />
-              </Route>
-              <Route path="/admin/dashboard/add" exact>
-                <AddUser />
-              </Route>
-            </>
-          )}
+          {/* {sessionStorage.getItem("authStatus") === "true" && ( */}
+
+          <Route path="/admin/dashboard" exact>
+            <Dashboard />
+          </Route>
+          <Route path="/admin/dashboard/add" exact>
+            <AddUser />
+          </Route>
+
+          {/* )} */}
           <Route path="*" exact>
             <div className="flex w-1/3 transition-all duration-300 mx-auto flex-col items-center justify-center mt-96">
               <h1 className="font-black text-center text-8xl transition-all duration-300 hover:scale-110 hover:text-blue-600 select-none  hover:tracking-widest">

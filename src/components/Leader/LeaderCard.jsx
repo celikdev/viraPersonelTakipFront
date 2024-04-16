@@ -34,7 +34,7 @@ const LeaderCard = () => {
   return (
     <>
       {data && (
-        <div className="flex h-52 mx-4 items-end gap-2">
+        <div className="flex flex-col h-52 mx-4 items-end gap-2">
           {/* 2 */}
           <div className="w-1/2 h-[90%] flex flex-col items-center mb-2">
             <SilverCrownIcon className="w-1/2" />

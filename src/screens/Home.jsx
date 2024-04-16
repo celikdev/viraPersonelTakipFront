@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className="flex flex-col gap-4 relative overflow-x-hidden">
       <div className="w-[180vw] h-96 absolute -z-10 rounded-b-full -left-[40vw] bg-gradient-to-t from-purple-800 to-purple-400" />
-      <Link to="/admin" className="flex justify-end mx-10 mt-4">
+      <Link to="/admin/dashboard" className="flex justify-end mx-10 mt-4">
         <UserIcon />
       </Link>
       <Button />
